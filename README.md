@@ -1,0 +1,1 @@
+[![CircleCI](https://circleci.com/gh/yusufduyar/spring-rest-examples.svg?style=svg)](https://circleci.com/gh/yusufduyar/spring-rest-examples)

@@ -18,21 +18,25 @@ public class UserController {
         this.apiService = apiService;
     }
 
-    @GetMapping({"","/","/index"})
-    public String index(){
+    @GetMapping({"", "/", "/index"})
+    public String index() {
         return "index";
     }
 
     @PostMapping("/users")
-    public String post(Model model, ServerWebExchange serverWebExchange){
-        MultiValueMap<String, String> map = serverWebExchange.getFormData().block();
+    public String post(Model model, ServerWebExchange serverWebExchange) {
+//        MultiValueMap<String, String> map = serverWebExchange.getFormData().block();
+//
+//        Integer limit = new Integer(map.get("limit").get(0));
+//
+//        if(limit == null || limit == 0){
+//            limit = 10;
+//        }
+//        model.addAttribute("users",apiService.getUsers(limit-1));
 
-        Integer limit = new Integer(map.get("limit").get(0));
+        model.addAttribute("users", apiService.getUsers(serverWebExchange
+                .getFormData().map(data -> new Integer(data.getFirst("limit")))));
 
-        if(limit == null || limit == 0){
-            limit = 10;
-        }
-        model.addAttribute("users",apiService.getUsers(limit-1));
         return "userlist";
     }
 }
